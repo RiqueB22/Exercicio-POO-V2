@@ -55,6 +55,7 @@ abstract public class Conta {
     public void transferir(double valor, Conta destino){
         //Checa se o saldo é > ou = ao valor recebido pelo parametro
         if(getSaldo() >= valor){
+            //Checa se destino é uma conta de poupança e caso seja deve tranferir no maximo 500
             if(destino instanceof ContaPoupanca && valor <= 500){
                 operacaoTransferir(valor, destino);
             }else if(destino instanceof ContaCorrente){
@@ -68,6 +69,7 @@ abstract public class Conta {
         System.out.println(" ");
     }
 
+    //Faz a transferencia entre conta corrente e poupança
     protected void operacaoTransferir(double valor, Conta destino){
         //Tira o valor na conta remetente
         setSaldo(getSaldo() - valor);

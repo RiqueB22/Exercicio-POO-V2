@@ -15,28 +15,33 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner inoutT = new Scanner(System.in);
+        //input Login
+        Scanner inputT = new Scanner(System.in);
         System.out.println("***************************************");
         System.out.println("Banco POO - Login");
         System.out.println("***************************************");
         System.out.println("Digite seu CPF(000.000.000-00): ");
-        String identificador = inoutT.nextLine();
+        String identificador = inputT.nextLine();
         Scanner inputS = new Scanner(System.in);
         System.out.println("Digite sua senha(minimo 8 caracteres): ");
         String senha = inputS.nextLine();
 
+        //instanciando conta corrente, conta poupança e titular
         Conta contaP;
         Conta contaC;
         Cliente titular;
 
+        //Checa se cpf e senha foi informado corretamente
         if (identificador.matches(".*[0-9\\\\.-].*") &&
                 identificador.matches("(\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2})") &&
                 senha.matches(".*[A-z0-9].*") &&
                 senha.length() >= 8) {
+            //inicializando os objetos
             titular = new Cliente(identificador);
             contaC = new ContaCorrente(123, titular, senha);
             contaP = new ContaPoupanca(456, titular, senha);
 
+            //Input de Conta
             Scanner inputC = new Scanner(System.in);
             System.out.println("***************************************");
             System.out.println("Banco POO - Conta");
@@ -49,8 +54,11 @@ public class Main {
             //Variaveis
             String opcao = "";
 
+            //Checa se tem só numero inteiro
             if(conta.matches(".*[0-9].*")){
+                //Loop do menu principal, se for 0 ele sai do loop e finaliza o programa
                 while(!opcao.equals("0")){
+                    //Checa se as opções são correspondentes ao do menu
                     switch (conta){
                         case "1":
                             opcao = opcaoConta(contaC, contaP, opcao);
@@ -74,7 +82,7 @@ public class Main {
     }
 
     protected static String opcaoConta(Conta remetente, Conta destinataria, String opcao){
-        //Input do Menu
+        //Input do menu principal
         Scanner input = new Scanner(System.in);
         System.out.println("***************************************");
         System.out.println("Banco POO - Menu principal");
