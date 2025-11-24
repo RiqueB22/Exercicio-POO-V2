@@ -30,7 +30,7 @@ abstract public class Conta {
         //Soma o valor do saldo mais o do parametro
         setSaldo(getSaldo() + valor);
         //Registra a transação
-        registrarExtrato("deposito", valor);
+        registrarTransacao("deposito", valor);
         System.out.println("Depositado com sucesso!");
         System.out.println(" ");
     }
@@ -43,7 +43,7 @@ abstract public class Conta {
             //Tira o valor da conta
             setSaldo(getSaldo() - valor);
             //Registra transação
-            registrarExtrato("saque", valor);
+            registrarTransacao("saque", valor);
             System.out.println("Sacado com sucesso!");
         }else {
             System.out.println("Saldo insuficiente!");
@@ -74,7 +74,7 @@ abstract public class Conta {
         //Tira o valor na conta remetente
         setSaldo(getSaldo() - valor);
         //Registra a trasanção
-        registrarExtrato("transferencia", valor);
+        registrarTransacao("transferencia", valor);
         //Adiciona o valor na conta destinataria
         destino.setSaldo(destino.getSaldo() + valor);
         System.out.println("transferencia feita com sucesso!");
@@ -86,7 +86,7 @@ abstract public class Conta {
     }
 
     //Registra transação
-    public void registrarExtrato(String tipo, double valor){
+    public void registrarTransacao(String tipo, double valor){
         //Cria o extrato
         Trasancao t = new Trasancao(TipoTransancao.valueOf(tipo.toUpperCase()), valor);
         //Adiciona a transação na lista de transações
